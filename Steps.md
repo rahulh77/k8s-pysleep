@@ -25,7 +25,7 @@ lrange job2 0 -1
 
 OR 
 
-./push_to_queue.py 10 
+local/push_to_queue.py 10 and local/pull_from_queue_worker.py
 ```
 
 ## Step 4 - Apply Job

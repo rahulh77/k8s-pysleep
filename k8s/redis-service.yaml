@@ -5,10 +5,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 6379
-      nodePort: 30379
-      targetPort: 6379
-      name: http
+    - nodePort: 30379 # exposed node port
+      port: 6379 # service port
+      targetPort: 6379 # pod port
   selector:
     app: redis
 
