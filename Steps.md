@@ -2,6 +2,8 @@
 
 [Parallel processing work queue](https://kubernetes.io/docs/tasks/job/fine-parallel-processing-work-queue/)
 
+[TODO](https://medium.com/faun/35-advanced-tutorials-to-learn-kubernetes-dae5695b1f18)
+
 ## Step 1 - Build and Push Image
 
 ``` bash
@@ -44,3 +46,15 @@ kubectl logs jobs/job-wq-2
 ``` bash
 kubectl delete -f k8s
 ```
+
+### TODO
+
+* Namespace
+* ClusterIP with Ingress controller
+* Integration with Prometheus + Grafana + Thanos
+* Helm chart
+* Skaffold
+* Ambassador API gateway
+* Run on EKS with EKSCTL
+* Istio / Service mesh
+* Patterns (https://github.com/k8spatterns/examples)
