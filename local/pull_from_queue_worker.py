@@ -17,10 +17,11 @@ import json
 from pysleep.task import Task
 
 # myhost= "<my_host_ip>" # "redis"
-myhost = os.getenv("MY_DOCKER_HOST")
+# myhost = os.getenv("MY_DOCKER_HOST")
+myhost = 'localhost'
 
 # Host address is the host machine ip, port is the forwarded port
-q = RedisWQ(name="job2", host=myhost, port="30379")
+q = RedisWQ(name="job2", host=myhost, port="7000")
 print("Worker with sessionID: " +  q.sessionID())
 print("Initial queue state: empty=" + str(q.empty()))
 while not q.empty():

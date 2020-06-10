@@ -15,7 +15,8 @@ from pysleep.task import Task
 
 
 no_of_tasks = int(sys.argv[1])
-myhost = os.getenv("MY_DOCKER_HOST")
+# myhost = os.getenv("MY_DOCKER_HOST")
+myhost = 'localhost'
 
 host="redis"
 
@@ -24,7 +25,7 @@ host="redis"
 # import os
 # host = os.getenv("REDIS_SERVICE_HOST")
 
-q = RedisWQ(name="job2", host=myhost, port="30379")
+q = RedisWQ(name="job2", host=myhost, port="7000")
 print("Worker with sessionID: " +  q.sessionID())
 print("Initial queue state: empty=" + str(q.empty()))
 for task_no in range(no_of_tasks):

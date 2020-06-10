@@ -4,20 +4,36 @@
 
 [TODO](https://medium.com/faun/35-advanced-tutorials-to-learn-kubernetes-dae5695b1f18)
 
+## Shortcuts
+
+``` bash
+kubens
+kga
+kgpo
+kgns
+kaf
+krmf
+```
+
 ## Step 1 - Build and Push Image
 
 ``` bash
 ./buildandpush.sh
 ```
 
-## Step 2 - Create Redis pod and service
+## Step 2 - Create Redis pod and service in namespace
 
 ``` bash
+kubectl apply -f k8s/ns-pysleep.yaml
 kubectl apply -f k8s/redis-pod.yaml
 kubectl apply -f k8s/redis-service.yaml
+OR
+ka -f k8s/ns-pysleep.yaml -f k8s/redis-pod.yaml -f k8s/redis-service.yaml
 ```
 
 ## Step 3 - Push to queue
+
+[port forward](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
 
 ``` bash
 kubectl exec -it pod/redis-master -- /bin/bash
@@ -25,9 +41,11 @@ redis-cli -h redis
 rpush job2 "apple" "banana" "cherry" "date" "fig" "grape" "lemon" "melon" "orange"
 lrange job2 0 -1
 
-OR 
-
-local/push_to_queue.py 10 and local/pull_from_queue_worker.py
+OR
+# Setup kubectl proxy (To access Clusterip/port inside eks cluster)
+kubectl port-forward service/redis 7000:6379
+local/push_to_queue.py 10
+# and local/pull_from_queue_worker.py (for local testing)
 ```
 
 ## Step 4 - Apply Job
@@ -45,16 +63,18 @@ kubectl logs jobs/job-wq-2
 
 ``` bash
 kubectl delete -f k8s
+krmf k8s
 ```
 
 ### TODO
 
 * Namespace
-* ClusterIP with Ingress controller
+* kubeproxy
 * Integration with Prometheus + Grafana + Thanos
+* ClusterIP with Ingress controller
 * Helm chart
 * Skaffold
 * Ambassador API gateway
 * Run on EKS with EKSCTL
 * Istio / Service mesh
-* Patterns (https://github.com/k8spatterns/examples)
+* Patterns [k8s patterns](https://github.com/k8spatterns/examples)
