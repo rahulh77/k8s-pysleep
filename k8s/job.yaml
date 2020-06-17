@@ -12,4 +12,10 @@ spec:
       containers:
       - name: c
         image: rahulh77/job-wq-2
+        imagePullPolicy: Always
+        env:
+          - name: INSTANCE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
       restartPolicy: OnFailure

@@ -15,6 +15,27 @@ kaf
 krmf
 ```
 
+## Setup Prom-Operator and Grafana
+
+``` bash
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo update
+kubectl create namespace monitoring
+helm install monitoring --namespace monitoring stable/prometheus-operator
+kgaowide
+# Change below service from clusterip to load balancer
+kubectl edit service/monitoring-prometheus-oper-prometheus
+kgaowide
+Access it at localhost:9090
+
+# Change below service from clusterip to load balancer
+# and port from 80 to 3000
+kubectl edit service/monitoring-grafana
+# UI Login: localhost:3000; admin/prom-operator
+
+helm install monitoring-pushgateway --namespace monitoring --set service.type=LoadBalancer stable/prometheus-pushgateway
+```
+
 ## Step 1 - Build and Push Image
 
 ``` bash

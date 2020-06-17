@@ -30,7 +30,7 @@ print("Worker with sessionID: " +  q.sessionID())
 print("Initial queue state: empty=" + str(q.empty()))
 for task_no in range(no_of_tasks):
     sleeptime = random.randint(5,20)
-    task = Task(task_name=f'TASK_'+str(task_no+1), sleep_time=sleeptime)
+    task = Task(task_name='TASK_'+str(task_no+1), sleep_time=sleeptime)
     print('Prepare to push')
     j = json.dumps(task.__dict__)
     q.put(j)
