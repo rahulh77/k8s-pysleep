@@ -25,7 +25,7 @@ host="redis"
 # import os
 # host = os.getenv("REDIS_SERVICE_HOST")
 
-q = RedisWQ(name="job2", host=myhost, port="7000")
+q = RedisWQ(name="job2", host=myhost, port="6379")
 print("Worker with sessionID: " +  q.sessionID())
 print("Initial queue state: empty=" + str(q.empty()))
 for task_no in range(no_of_tasks):

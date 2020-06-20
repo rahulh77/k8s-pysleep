@@ -22,6 +22,11 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
 kubectl create namespace monitoring
 helm install monitoring --namespace monitoring stable/prometheus-operator
+
+or 
+# Edit values.yaml (ClusterIP -> LoadBalancer and default ports) and run
+cd to helm chart stable prometheus
+helm upgrade monitoring --namespace monitoring .
 kgaowide
 # Change below service from clusterip to load balancer
 kubectl edit service/monitoring-prometheus-oper-prometheus

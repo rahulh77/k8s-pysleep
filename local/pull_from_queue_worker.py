@@ -28,7 +28,7 @@ JOB='my_pysleep_job'
 
 
 # Host address is the host machine ip, port is the forwarded port
-q = RedisWQ(name="job2", host=myhost, port="7000")
+q = RedisWQ(name="job2", host=myhost, port="6379")
 print("Worker with sessionID: " +  q.sessionID())
 print("Initial queue state: empty=" + str(q.empty()))
 g = Gauge(name='pysleep_requests_gauge', documentation='Description of gauge', labelnames=['task_no'], registry=REGISTRY)

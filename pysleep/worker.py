@@ -18,7 +18,8 @@ print("Worker with sessionID: " +  q.sessionID())
 print("Initial queue state: empty=" + str(q.empty()))
 
 # PUSHGATEWAY_URL = 'localhost:9091'
-PUSHGATEWAY_URL = 'monitoring-pushgateway-prometheus-pushgateway.monitoring.svc.cluster.local:9091'
+PUSHGATEWAY_URL = 'monitoring-prometheus-pushgateway.monitoring.svc.cluster.local:9091'
+# PUSHGATEWAY_URL = 'monitoring-pushgateway-prometheus-pushgateway.monitoring.svc.cluster.local:9091'
 REGISTRY = CollectorRegistry()
 JOB='my_pysleep_job'
 INSTANCE=os.environ.get('INSTANCE_NAME', 'NO_INSTANCE')
