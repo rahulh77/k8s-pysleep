@@ -1,7 +1,7 @@
 # Steps
 
 [Parallel processing work queue](https://kubernetes.io/docs/tasks/job/fine-parallel-processing-work-queue/)
-
+[Workshop](https://github.com/juliusv/prometheus_workshop/blob/master/workshop.md)
 [TODO](https://medium.com/faun/35-advanced-tutorials-to-learn-kubernetes-dae5695b1f18)
 
 ## Shortcuts
@@ -31,7 +31,16 @@ kgaowide
 # Change below service from clusterip to load balancer
 kubectl edit service/monitoring-prometheus-oper-prometheus
 kgaowide
-Access it at localhost:9090
+
+cd to helm chart stable grafana
+helm upgrade grafana --namespace monitoring . --set persistence.enabled=false
+admin/admin
+
+
+http://localhost:9090/graph
+http://localhost:9091/
+http://localhost:9093/#/alerts
+
 
 # Change below service from clusterip to load balancer
 # and port from 80 to 3000
@@ -90,6 +99,8 @@ kubectl logs jobs/job-wq-2
 ``` bash
 kubectl delete -f k8s
 krmf k8s
+
+curl -X DELETE http://localhost:9091/metrics/job/job-wq-2/instance/job-wq-2-42jc8
 ```
 
 ### TODO
@@ -104,3 +115,9 @@ krmf k8s
 * Run on EKS with EKSCTL
 * Istio / Service mesh
 * Patterns [k8s patterns](https://github.com/k8spatterns/examples)
+
+
+* node exporter (for server level metrics - e.g. linux server metrics)
+* custom exporter (for trd party (of the shelf) applications, batch processor)
+* client library (for application metrics - e.g. web application metrics)
+* push gateway - for short lived jobs

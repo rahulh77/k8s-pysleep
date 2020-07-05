@@ -35,15 +35,15 @@ while not q.empty():
     print("Working on " + task.task_name)
     
     # Task Start
-    g.labels(task.task_name, 'started', task.sleep_time, INSTANCE).set(1)
+    g.labels(task_no=task.task_name, status='started', sleep_time=task.sleep_time, instance=INSTANCE).set(1)
     pushadd_to_gateway(PUSHGATEWAY_URL, job=JOB, registry=REGISTRY)
     time.sleep(task.sleep_time) # Put your actual work here instead of sleep.
     # Task End
-    g.labels(task.task_name, 'completed', task.sleep_time, INSTANCE).set(2)
+    g.labels(task_no=task.task_name, status='started', sleep_time=task.sleep_time, instance=INSTANCE).set(2)
     pushadd_to_gateway(PUSHGATEWAY_URL, job=JOB, registry=REGISTRY)
     print('Pushed to pushgateway: ', task.task_name)
 
-    q.complete(item)
-  else:
-    print("Waiting for work")
+  #   q.complete(item)
+  # else:
+  #   print("Waiting for work")
 print("Queue empty, exiting")
