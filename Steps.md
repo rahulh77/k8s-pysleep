@@ -23,7 +23,7 @@ helm repo update
 kubectl create namespace monitoring
 helm install monitoring --namespace monitoring stable/prometheus-operator
 
-or 
+or
 # Edit values.yaml (ClusterIP -> LoadBalancer and default ports) and run
 cd to helm chart stable prometheus
 helm upgrade monitoring --namespace monitoring .
@@ -59,11 +59,11 @@ helm install monitoring-pushgateway --namespace monitoring --set service.type=Lo
 ## Step 2 - Create Redis pod and service in namespace
 
 ``` bash
-kubectl apply -f k8s/ns-pysleep.yaml
-kubectl apply -f k8s/redis-pod.yaml
-kubectl apply -f k8s/redis-service.yaml
+kubectl apply -f k8s/00-ns-pysleep.yaml
+kubectl apply -f k8s/01-redis-pod.yaml
+kubectl apply -f k8s/02-redis-service.yaml
 OR
-ka -f k8s/ns-pysleep.yaml -f k8s/redis-pod.yaml -f k8s/redis-service.yaml
+ka -f k8s/00-ns-pysleep.yaml -f k8s/01-redis-pod.yaml -f k8s/02-redis-service.yaml
 ```
 
 ## Step 3 - Push to queue
@@ -90,8 +90,9 @@ kubectl apply -f k8s/job.yaml
 kgpo
 kgaowide
 
+kubens ns-pysleep
 kubectl describe jobs/job-wq-2
-kubectl logs jobs/job-wq-2
+kubectl logs jobs/job-wq-2 -f
 ```
 
 ## Step 5 - Cleanup
@@ -115,7 +116,6 @@ curl -X DELETE http://localhost:9091/metrics/job/job-wq-2/instance/job-wq-2-42jc
 * Run on EKS with EKSCTL
 * Istio / Service mesh
 * Patterns [k8s patterns](https://github.com/k8spatterns/examples)
-
 
 * node exporter (for server level metrics - e.g. linux server metrics)
 * custom exporter (for trd party (of the shelf) applications, batch processor)
